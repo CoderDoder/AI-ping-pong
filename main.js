@@ -13,6 +13,9 @@ var paddle1Y;
 var  playerscore =0;
 var audio1;
 var pcscore =0;
+
+var gamestat="";
+
 //ball x and y and speedx speed y and radius
 var ball = {
     x:350/2,
@@ -53,9 +56,7 @@ function modelLoaded(){
 
 
 function draw(){
-
-
-   
+   if(gamestat=="start"){
  background(0); 
 
  image(video,0,0,700,400);
@@ -97,7 +98,9 @@ function draw(){
    
    //function move call which in very important
     move();
+  }
 }
+
 
 
 
@@ -107,9 +110,16 @@ function reset(){
    ball.y = height/2+100;
    ball.dx=3;
    ball.dy =3;
+
    
 }
 
+function restart(){
+  draw();
+  pcscore=0;
+
+  
+}
 
 //function midline draw a line in center
 function midline(){
@@ -168,6 +178,7 @@ if(pcscore ==4){
     text("Reload The Page!",width/2,height/2+30)
     noLoop();
     pcscore = 0;
+
 }
    if(ball.y+ball.r > height || ball.y-ball.r <0){
        ball.dy =- ball.dy;
@@ -194,4 +205,10 @@ function paddleInCanvas(){
   if(mouseY < 0){
     mouseY =0;
   }  
+}
+
+function start(){
+  gamestat="start"
+  document.getElementById("status").innerHTML="Game Loaded";
+  
 }
